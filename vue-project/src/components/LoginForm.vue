@@ -1,13 +1,13 @@
 <template>
    <div class="login-form">
-      <form class="form-cont">
+      <form class="form-cont" @submit="authenticate">
          <h1 class="login-form-header">היי, טוב לראות אותך</h1>
          <div class="input-group">
-            <input name="email" type="email" placeholder="מייל"/>
+            <input name="email" type="email" placeholder="מייל" v-model="username"/>
             <label for="email">כתוב המייל איתה נרשמת לחשבונית ירוקה</label>
          </div>
          <div class="input-group">
-            <input type="password" name="password" placeholder="סיסמה" />
+            <input type="password" name="password" placeholder="סיסמה" v-model="password"/>
             <label for="password"><a href="">שכחת סיסמה?</a></label>
          </div>
          <div class="submit-group">
@@ -22,7 +22,34 @@
 </template>
 
 <script>
+   import { mapActions } from 'vuex';
 
+   export default {
+      name: 'login',
+      data() {
+         return {
+            username: '',
+            password: ''
+         }
+      },
+      methods: {
+         ...mapActions(['LogIn']),
+         async authenticate(e) {
+            e.preventDefault()
+            const user = {
+               username: this.username,
+               password: this.password
+            }
+            try {
+               await this.LogIn(user);
+               this.$router.push('/');
+               debugger;
+            } catch (err) {
+               console.log(err)
+            }
+         },
+      },
+   }
 </script>
 
 <style scoped>
