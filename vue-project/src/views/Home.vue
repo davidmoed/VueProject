@@ -5,8 +5,8 @@
        <router-link to="/dashboard">Dashboard</router-link>
      </div>
       <div class="welcome-section">
-        <!-- <h1>Hello, {{user.firstName}} welcome to your {{user.bussinesName}}</h1> -->
-        <h1>Hello User@user.com welcome to your Big Company homepage</h1>
+         <!-- add placeholder option to maintain dynamic data without functioning auth -->
+        <h1>Hello, {{user ? user.username : 'Placeholder'}} welcome to your {{user ? user.businessName : 'Business'}}</h1>
         <div class="dashboard-button">
            View Your Dashboard
         </div>
@@ -34,6 +34,7 @@ export default {
       }
    }
 }
+
 </script>
 
 <style scoped>
